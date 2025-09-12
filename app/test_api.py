@@ -7,7 +7,7 @@ def test_criar_evento():
     response = client.post("/eventos", json={
         "nome": "Casamento",
         "cliente": "Ana",
-        "data": "20/10/2025",
+        "data": "2025-10-20",  # Corrigido para formato ISO (YYYY-MM-DD)
         "orcamento": 5000
     })
     assert response.status_code == 200
