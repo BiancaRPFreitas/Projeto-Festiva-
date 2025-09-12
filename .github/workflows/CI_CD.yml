@@ -1,0 +1,75 @@
+name: CI/CD FESTIVA
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ci:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest flake8 black pylint
+
+      - name: Lint with Flake8
+        run: flake8 app/
+
+      - name: Check formatting with Black
+        run: black --check app/
+
+      - name: Pylint
+        run: pylint app/
+
+      - name: Run tests
+        run: pytest
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: python
+
+      - name: CodeQL Autobuild
+        uses: github/codeql-action/autobuild@v2
+
+      - name: CodeQL Analyze
+        uses: github/codeql-action/analyze@v2
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: festiva-artifact
+          path: |
+            '**.py'
+            README.md
+
+  cd:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: ci   # só roda se CI passar
+    if: github.ref == 'refs/heads/main'  # garante deploy só na main
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: festiva-artifact
+
+      - name: Deploy to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          git remote add heroku https://git.heroku.com/<SEU_APP>.git
+          git push heroku main -f
