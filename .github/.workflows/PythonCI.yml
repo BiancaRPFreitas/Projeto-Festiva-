@@ -45,4 +45,5 @@ jobs:
 
     - name: 🧪 Rodar testes
       run: |
-         PYTHONPATH=$(pwd) pytest
+          export PYTHONPATH=$(pwd)
+          pytest
