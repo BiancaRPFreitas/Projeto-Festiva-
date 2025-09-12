@@ -1,0 +1,41 @@
+name: Continuous Delivery
+
+on: 
+ push:
+  branches:
+      -main
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do repositório
+      uses: actions/checkout@v3
+
+     # Rodar Pylint
+    - name: Lint code
+      run: |
+          pip install pylint
+          pylint app/
+    
+     # Rodar CodeQL
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+          languages: python
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+
+    - name: Teste CD
+      uses: actions/upload-artifact@v4
+      with:
+        name: testezipcd.zip
+        path: |
+          '**.py'
+          README.md
