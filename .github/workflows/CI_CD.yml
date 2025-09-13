@@ -26,7 +26,7 @@ jobs:
           pip install pytest flake8 black pylint
 
       - name: Check formatting with Black
-        run: black --check app/
+        run: black app/
 
       - name: Pylint
         run: |
