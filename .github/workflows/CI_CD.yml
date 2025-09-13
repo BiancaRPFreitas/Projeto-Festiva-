@@ -32,7 +32,9 @@ jobs:
         run: black --check app/
 
       - name: Pylint
-        run: pylint app/
+        run: |
+         export PYTHONPATH=$PWD
+         pylint app/
 
       - name: Run tests
         run: pytest
