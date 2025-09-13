@@ -13,3 +13,4 @@ class Evento:
         self.nome = nome
         self.data = data
         self.local = local
+        
