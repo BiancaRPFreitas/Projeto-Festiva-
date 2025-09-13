@@ -5,7 +5,7 @@ from app.routers import clientes, eventos, agendas  # Importa os módulos de rot
 app = FastAPI(
     title="🎉 FESTIVA",
     description="Seu evento sob controle, sua criatividade em destaque!",
-    version="1.0.0"
+    version="1.0.0",
 )
 
 
@@ -16,12 +16,6 @@ def home():
 
 
 # Incluindo routers
-app.include_router(
-    clientes.router, prefix="/clientes", tags=["Clientes"]
-)
-app.include_router(
-    eventos.router, prefix="/eventos", tags=["Eventos"]
-)
-app.include_router(
-    agendas.router, prefix="/agenda", tags=["Agendas"]
-)
+app.include_router(clientes.router, prefix="/clientes", tags=["Clientes"])
+app.include_router(eventos.router, prefix="/eventos", tags=["Eventos"])
+app.include_router(agendas.router, prefix="/agenda", tags=["Agendas"])
