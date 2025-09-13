@@ -1,25 +1,26 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
+from typing import List
 
 router = APIRouter()
 
-# Modelo de dados para representar um evento
+# Modelo de dados para o evento
 class Evento(BaseModel):
     nome: str
-    data: str   # pode ser trocado para datetime se quiser validar datas automaticamente
-    local: str
+    cliente: str
+    data: str
+    orcamento: int
 
-# "Banco de dados" em memória
-eventos_db = []
+# Banco de dados em memória
+eventos_db: List[Evento] = []
 
-# Endpoint para listar eventos
 @router.get("/")
 def listar_eventos():
+    """Retorna todos os eventos cadastrados."""
     return eventos_db
 
-# Endpoint para criar evento
-@router.post("/")
+@router.post("/", response_model=Evento)
 def criar_evento(evento: Evento):
-    evento_dict = evento.dict()
-    eventos_db.append(evento_dict)
-    return evento_dict
+    """Cria um novo evento e adiciona no banco de dados."""
+    eventos_db.append(evento)
+    return evento

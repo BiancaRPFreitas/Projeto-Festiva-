@@ -4,16 +4,23 @@ from app.main import app
 client = TestClient(app)
 
 def test_criar_evento():
-    response = client.post("/eventos/", json={
-        "nome": "Casamento",
-        "data": "2025-10-20",
-        "local": "Salão"
-    })
+    """Testa a criação de um evento através da rota POST /eventos."""
+    response = client.post(
+        "/eventos",
+        json={
+            "nome": "Casamento",
+            "cliente": "Ana",
+            "data": "2025-10-20",
+            "orcamento": 5000
+        },
+    )
     assert response.status_code == 200
     assert response.json()["nome"] == "Casamento"
+    assert response.json()["cliente"] == "Ana"
+    assert response.json()["orcamento"] == 5000
 
 def test_listar_eventos():
-    response = client.get("/eventos/")
+    """Testa a listagem de eventos através da rota GET /eventos."""
+    response = client.get("/eventos")
     assert response.status_code == 200
     assert isinstance(response.json(), list)
-
