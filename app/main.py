@@ -4,7 +4,9 @@ from app.routers import clientes, eventos, agendas  # Importa os módulos de rot
 
 app = FastAPI(
     title="🎉 FESTIVA",
-    description="Seu evento sob controle, sua criatividade em destaque!",
+    description=(
+        "Seu evento sob controle, sua criatividade em destaque!"
+    ),
     version="1.0.0",
 )
 
