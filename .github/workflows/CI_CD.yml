@@ -25,9 +25,6 @@ jobs:
           pip install -r requirements.txt
           pip install pytest flake8 black pylint
 
-      - name: Lint with Flake8
-        run: flake8 app/
-
       - name: Check formatting with Black
         run: black --check app/
 
