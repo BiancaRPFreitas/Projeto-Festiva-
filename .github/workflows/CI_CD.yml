@@ -53,9 +53,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: festivaZIP.zip
+          name: festivaZIP
           path: |
-            '**.py'
+            **/*.py
             README.md
 
   cd:
