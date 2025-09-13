@@ -15,11 +15,13 @@ eventos_db = []
 # Endpoint para listar eventos
 @router.get("/")
 def listar_eventos():
+    """Retorna todos os eventos"""
     return eventos_db
 
-# Endpoint para criar evento
+
 @router.post("/")
-def criar_evento(evento: Evento):
-    evento_dict = evento.dict()
-    eventos_db.append(evento_dict)
-    return evento_dict
+def criar_evento(nome: str, data: str, local: str):
+    """Cria um novo evento e adiciona ao banco"""
+    evento = {"nome": nome, "data": data, "local": local}
+    eventos_db.append(evento)
+    return evento
