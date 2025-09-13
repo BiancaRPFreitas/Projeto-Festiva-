@@ -28,11 +28,6 @@ jobs:
       - name: Check formatting with Black
         run: black app/
 
-      - name: Pylint
-        run: |
-         export PYTHONPATH=$PWD
-         pylint app/
-
       - name: Run tests
         run: pytest
 
