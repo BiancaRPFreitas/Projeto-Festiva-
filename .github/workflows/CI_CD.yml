@@ -29,7 +29,10 @@ jobs:
         run: black app/
 
       - name: Run tests
-        run: pytest
+        run: |
+          export PYTHONPATH=$PWD
+          pytest
+           
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
