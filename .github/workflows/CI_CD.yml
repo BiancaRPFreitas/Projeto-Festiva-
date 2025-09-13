@@ -63,9 +63,8 @@ jobs:
         with:
           name: festivaZIP.zip
 
-      - name: Deploy to Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      - name: Simulate deploy
         run: |
-          git remote add heroku https://git.heroku.com/<SEU_APP>.git
-          git push heroku main -f
+          echo "✅ Artifact downloaded successfully"
+          echo "✅ Deploy simulated: FESTIVA would be deployed here"
+          ls -R  # mostra os arquivos baixados 
