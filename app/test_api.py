@@ -1,3 +1,9 @@
+from fastapi.testclient import TestClient
+from app.main import app
+
+client = TestClient(app)
+
+
 def test_criar_evento():
     response = client.post(
         "/eventos",
@@ -16,4 +22,3 @@ def test_listar_eventos():
     response = client.get("/eventos")
     assert response.status_code == 200
     assert isinstance(response.json(), list)
-

@@ -11,6 +11,7 @@ app = FastAPI(
 )
 
 
+
 @app.get("/")
 def home():
     """Rota principal de boas-vindas"""
