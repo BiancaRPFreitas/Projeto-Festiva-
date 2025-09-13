@@ -14,10 +14,12 @@ app = FastAPI(
     version="1.0.0",
 )
 
+
 @app.get("/")
 def home():
     """Rota principal de boas-vindas"""
     return {"Bem-vindos ao FESTIVA 🎉"}
+
 
 # Incluindo routers
 app.include_router(clientes.router, prefix="/clientes", tags=["Clientes"])
