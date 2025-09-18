@@ -36,36 +36,26 @@ jobs:
       - name: Run tests
         run: |
           export PYTHONPATH=$PWD
-          pytest
-       
-      # Alerta quando falha
-      - name: Send email on failure
+          pytest 
+          
+          
+       # Alerta de falha no discord
+      - name: Discord alert on failure
         if: failure()
-        uses: dawidd6/action-send-mail@v3
+        uses: Ilshidur/action-discord@master
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "Falha de testes no Projeto FESTIVA"
-          from: github-actions@festiva.com
-          to: ${{ secrets.EMAIL_USERNAME }}
-          body: "Os testes falharam. Verifique a PR."
+          args: "Falha de testes no Projeto FESTIVA! Verifique a PR."
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
-      # Alerta quando sucesso
-      - name: Send email on success
+      # Alerta de sucesso no discord
+      - name: Discord alert on success
         if: success()
-        uses: dawidd6/action-send-mail@v3
+        uses: Ilshidur/action-discord@master
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "Sucesso nos testes do Projeto FESTIVA"
-          from: github-actions@festiva.com
-          to: ${{ secrets.EMAIL_USERNAME }}
-          body: "Todos os testes passaram com sucesso!"    
-
+          args: "✅ CI Sucesso no Projeto FESTIVA! Todos os testes passaram."
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
            
 
       - name: Initialize CodeQL
