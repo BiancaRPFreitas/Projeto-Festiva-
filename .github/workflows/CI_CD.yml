@@ -36,7 +36,26 @@ jobs:
       - name: Run tests
         run: |
           export PYTHONPATH=$PWD
-          pytest
+          pytest 
+          
+          
+       # Alerta de falha no discord
+      - name: Discord alert on failure
+        if: failure()
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "❌Falha de testes no Projeto FESTIVA! Verifique a PR."
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
+      # Alerta de sucesso no discord
+      - name: Discord alert on success
+        if: success()
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "✅Sucesso no Projeto FESTIVA! Todos os testes passaram."
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
            
 
       - name: Initialize CodeQL
