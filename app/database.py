@@ -1,18 +1,5 @@
-clientes_db = []
-eventos_db = []
-agendas_db = []
+from app.models import Cliente, Evento, Agenda
 
-
-def listar_clientes():
-    """Retorna todos os clientes"""
-    return clientes_db
-
-
-def listar_eventos():
-    """Retorna todos os eventos"""
-    return eventos_db
-
-
-def listar_agendas():
-    """Retorna todas as agendas"""
-    return agendas_db
+clientes_db: list[Cliente] = []
+eventos_db: list[Evento] = []
+agendas_db: list[Agenda] = []
