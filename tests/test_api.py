@@ -13,7 +13,7 @@ def test_criar_evento():
         json={
             "id": str(uuid4()),
             "nome": "Casamento",
-            "cliente": "Ana",
+            "cliente": "Mariana",
             "data": "2025-10-20",
             "orcamento": 5000
         }
@@ -21,7 +21,7 @@ def test_criar_evento():
     assert response.status_code == 200
     data = response.json()
     assert data["nome"] == "Casamento"
-    assert data["cliente"] == "Ana"
+    assert data["cliente"] == "Mariana"
     assert data["orcamento"] == 5000
 
 def test_listar_eventos():
@@ -39,7 +39,7 @@ def test_atualizar_evento():
         json={
             "id": evento["id"],
             "nome": "Casamento Atualizado",
-            "cliente": "Ana",
+            "cliente": "Mariana",
             "data": "2025-10-21",
             "orcamento": 7000
         }
