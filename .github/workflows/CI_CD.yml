@@ -37,7 +37,12 @@ jobs:
         run: |
           export PYTHONPATH=$PWD
           pytest 
-          
+
+
+  disc:
+     name: Discord
+     runs-on: ubuntu-latest
+     steps:      
           
        # Alerta de falha no discord
       - name: Discord alert on failure
