@@ -36,4 +36,3 @@ def deletar_evento(nome_evento: str):
             eventos_db.pop(i)
             return {"detail": "Evento deletado com sucesso"}
     raise HTTPException(status_code=404, detail="Evento não encontrado")
-
