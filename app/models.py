@@ -1,16 +1,20 @@
-class Cliente:
-    """Modelo que representa um cliente."""
+from pydantic import BaseModel, EmailStr
+from uuid import UUID
 
-    def __init__(self, nome: str, email: str):
-        self.nome = nome
-        self.email = email
+class Cliente(BaseModel):
+    id: UUID
+    nome: str
+    email: EmailStr
 
+class Evento(BaseModel):
+    id: UUID
+    nome: str
+    cliente: str
+    data: str
+    orcamento: int
 
-class Evento:
-    """Modelo que representa um evento."""
-
-    def __init__(self, nome: str, data: str, local: str):
-        self.nome = nome
-        self.data = data
-        self.local = local
-        
+class Agenda(BaseModel):
+    id: UUID
+    evento: str
+    data: str
+    local: str
