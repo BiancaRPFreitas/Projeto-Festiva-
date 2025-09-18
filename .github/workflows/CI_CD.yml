@@ -53,7 +53,7 @@ jobs:
         if: success()
         uses: Ilshidur/action-discord@master
         with:
-          args: "✔️Sucesso no Projeto FESTIVA! Todos os testes passaram."
+          args: "✅Sucesso no Projeto FESTIVA! Todos os testes passaram."
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
            
